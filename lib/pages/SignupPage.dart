@@ -45,14 +45,16 @@ class _SignupPageState extends State<SignupPage> {
                     text: "Continue with Google",
                     onClick: () {},
                     imagePath: "assets/google.svg",
+                    size: 25,
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   ButtonItem(
-                    text: "Continue with Google",
+                    text: "Continue with Mobile",
                     onClick: () {},
-                    imagePath: "assets/google.svg",
+                    imagePath: "assets/phone.svg",
+                    size: 30,
                   ),
                   SizedBox(
                     height: 15,

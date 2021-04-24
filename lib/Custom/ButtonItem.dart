@@ -3,12 +3,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ButtonItem extends StatelessWidget {
   const ButtonItem(
-      {Key key, this.imagePath, this.onClick, this.text, this.iconData})
+      {Key key,
+      this.imagePath,
+      this.onClick,
+      this.text,
+      this.iconData,
+      this.size})
       : super(key: key);
   final String text;
   final String imagePath;
   final Function onClick;
   final IconData iconData;
+  final double size;
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +36,12 @@ class ButtonItem extends StatelessWidget {
               children: [
                 SvgPicture.asset(
                   imagePath,
-                  height: 20,
-                  width: 20,
-                  color: Colors.white,
+                  height: size,
+                  width: size,
+                  // color: Colors.white,
                 ),
                 // Icon(iconData),
-                SizedBox(width: 10),
+                SizedBox(width: 15),
                 Text(
                   text,
                   style: TextStyle(fontSize: 17, color: Colors.white),
