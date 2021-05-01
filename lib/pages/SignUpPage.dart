@@ -1,7 +1,5 @@
-import 'package:firebase_app_web/pages/HomePage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 class SignUpPage extends StatefulWidget {
   SignUpPage({Key key}) : super(key: key);
@@ -11,11 +9,6 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  TextEditingController emailController = TextEditingController();
-  TextEditingController pwdController = TextEditingController();
-  firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
-  bool circular = false;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,11 +46,11 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(
                 height: 18,
               ),
-              textItem("Email....", emailController, false),
+              textItem("Email...."),
               SizedBox(
                 height: 15,
               ),
-              textItem("Password...", pwdController, true),
+              textItem("Password..."),
               SizedBox(
                 height: 40,
               ),
@@ -93,56 +86,21 @@ class _SignUpPageState extends State<SignUpPage> {
   }
 
   Widget colorButton() {
-    return InkWell(
-      onTap: circular
-          ? null
-          : () async {
-              setState(() {
-                circular = true;
-              });
-              try {
-                firebase_auth.UserCredential userCredential =
-                    await firebaseAuth.createUserWithEmailAndPassword(
-                        email: emailController.text,
-                        password: pwdController.text);
-                print(userCredential.user.email);
-                setState(() {
-                  circular = false;
-                });
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (builder) => HomePage()),
-                    (route) => false);
-              } catch (e) {
-                print(e);
-                setState(() {
-                  circular = false;
-                });
-                final snackBar = SnackBar(content: Text(e.toString()));
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              }
-            },
-      child: Container(
-        width: MediaQuery.of(context).size.width - 100,
-        height: 60,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-          gradient: LinearGradient(colors: [
-            Color(0xfffd746c),
-            Color(0xffff9068),
-            Color(0xfffd746c)
-          ]),
-        ),
-        child: Center(
-          child: circular
-              ? CircularProgressIndicator()
-              : Text(
-                  "Sign Up",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                  ),
-                ),
+    return Container(
+      width: MediaQuery.of(context).size.width - 100,
+      height: 60,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(20),
+        gradient: LinearGradient(
+            colors: [Color(0xfffd746c), Color(0xffff9068), Color(0xfffd746c)]),
+      ),
+      child: Center(
+        child: Text(
+          "Sign Up",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+          ),
         ),
       ),
     );
@@ -186,18 +144,11 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget textItem(
-      String labeltext, TextEditingController controller, bool obscureText) {
+  Widget textItem(String labeltext) {
     return Container(
       width: MediaQuery.of(context).size.width - 70,
       height: 55,
       child: TextFormField(
-        obscureText: obscureText,
-        style: TextStyle(
-          fontSize: 17,
-          color: Colors.white,
-        ),
-        controller: controller,
         decoration: InputDecoration(
           labelText: labeltext,
           labelStyle: TextStyle(
@@ -209,13 +160,6 @@ class _SignUpPageState extends State<SignUpPage> {
             borderSide: BorderSide(
               width: 1,
               color: Colors.grey,
-            ),
-          ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(
-              width: 1.5,
-              color: Colors.amber,
             ),
           ),
         ),
