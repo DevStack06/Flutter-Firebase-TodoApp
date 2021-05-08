@@ -1,18 +1,17 @@
-import 'package:firebase_app_web/pages/SignUpPage.dart';
+import 'package:firebase_app_web/pages/HomePage.dart';
+import 'package:firebase_app_web/pages/SignInPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
-import 'HomePage.dart';
-
-class SignInPage extends StatefulWidget {
-  SignInPage({Key key}) : super(key: key);
+class SignUpPage extends StatefulWidget {
+  SignUpPage({Key key}) : super(key: key);
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _SignUpPageState createState() => _SignUpPageState();
 }
 
-class _SignInPageState extends State<SignInPage> {
+class _SignUpPageState extends State<SignUpPage> {
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   TextEditingController _emailController = TextEditingController();
   TextEditingController _pwdController = TextEditingController();
@@ -30,7 +29,7 @@ class _SignInPageState extends State<SignInPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                "Sign In",
+                "Sign Up",
                 style: TextStyle(
                   fontSize: 35,
                   color: Colors.white,
@@ -71,7 +70,7 @@ class _SignInPageState extends State<SignInPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "If you don't have an Account? ",
+                    "If you alredy have an Account? ",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16,
@@ -81,11 +80,11 @@ class _SignInPageState extends State<SignInPage> {
                     onTap: () {
                       Navigator.pushAndRemoveUntil(
                           context,
-                          MaterialPageRoute(builder: (builder) => SignUpPage()),
+                          MaterialPageRoute(builder: (builder) => SignInPage()),
                           (route) => false);
                     },
                     child: Text(
-                      "SignUp",
+                      "Login",
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 16,
@@ -94,17 +93,6 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                 ],
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "Forgot Password?",
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
               ),
             ],
           ),
@@ -116,9 +104,12 @@ class _SignInPageState extends State<SignInPage> {
   Widget colorButton() {
     return InkWell(
       onTap: () async {
+        setState(() {
+          circular = true;
+        });
         try {
           firebase_auth.UserCredential userCredential =
-              await firebaseAuth.signInWithEmailAndPassword(
+              await firebaseAuth.createUserWithEmailAndPassword(
                   email: _emailController.text, password: _pwdController.text);
           print(userCredential.user.email);
           setState(() {
@@ -151,7 +142,7 @@ class _SignInPageState extends State<SignInPage> {
           child: circular
               ? CircularProgressIndicator()
               : Text(
-                  "Sign In",
+                  "Sign Up",
                   style: TextStyle(
                     color: Colors.white,
                     fontSize: 20,
