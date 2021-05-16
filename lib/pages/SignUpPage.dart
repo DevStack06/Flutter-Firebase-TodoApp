@@ -1,3 +1,4 @@
+import 'package:firebase_app_web/Service/Auth_Service.dart';
 import 'package:firebase_app_web/pages/HomePage.dart';
 import 'package:firebase_app_web/pages/SignInPage.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _emailController = TextEditingController();
   TextEditingController _pwdController = TextEditingController();
   bool circular = false;
+  AuthClass authClass = AuthClass();
 
   @override
   Widget build(BuildContext context) {
@@ -39,11 +41,14 @@ class _SignUpPageState extends State<SignUpPage> {
               SizedBox(
                 height: 20,
               ),
-              buttonItem("assets/google.svg", "Continue with Google", 25),
+              buttonItem("assets/google.svg", "Continue with Google", 25,
+                  () async {
+                await authClass.googleSignIn(context);
+              }),
               SizedBox(
                 height: 15,
               ),
-              buttonItem("assets/phone.svg", "Continue with Mobile", 30),
+              buttonItem("assets/phone.svg", "Continue with Mobile", 30, () {}),
               SizedBox(
                 height: 18,
               ),
@@ -153,39 +158,43 @@ class _SignUpPageState extends State<SignUpPage> {
     );
   }
 
-  Widget buttonItem(String imagepath, String buttonName, double size) {
-    return Container(
-      width: MediaQuery.of(context).size.width - 60,
-      height: 60,
-      child: Card(
-        color: Colors.black,
-        elevation: 8,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
-          side: BorderSide(
-            width: 1,
-            color: Colors.grey,
+  Widget buttonItem(
+      String imagepath, String buttonName, double size, Function onTap) {
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        width: MediaQuery.of(context).size.width - 60,
+        height: 60,
+        child: Card(
+          color: Colors.black,
+          elevation: 8,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+            side: BorderSide(
+              width: 1,
+              color: Colors.grey,
+            ),
           ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SvgPicture.asset(
-              imagepath,
-              height: size,
-              width: size,
-            ),
-            SizedBox(
-              width: 15,
-            ),
-            Text(
-              buttonName,
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 17,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                imagepath,
+                height: size,
+                width: size,
               ),
-            ),
-          ],
+              SizedBox(
+                width: 15,
+              ),
+              Text(
+                buttonName,
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 17,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

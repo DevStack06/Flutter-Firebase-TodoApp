@@ -1,3 +1,5 @@
+import 'package:firebase_app_web/Service/Auth_Service.dart';
+import 'package:firebase_app_web/pages/SignInPage.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,8 +10,24 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  AuthClass authClass = AuthClass();
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        actions: [
+          IconButton(
+              icon: Icon(Icons.logout),
+              onPressed: () async {
+                authClass.signOut();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (builder) => SignInPage()),
+                    (route) => false);
+              }),
+        ],
+      ),
+    );
   }
 }
