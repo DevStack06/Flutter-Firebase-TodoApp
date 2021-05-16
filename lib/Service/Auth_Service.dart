@@ -44,7 +44,7 @@ class AuthClass {
     }
   }
 
-  void signOut({BuildContext context}) async {
+  Future<void> signOut({BuildContext context}) async {
     try {
       await _googleSignIn.signOut();
       await _auth.signOut();
