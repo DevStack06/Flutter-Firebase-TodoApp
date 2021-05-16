@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class AuthClass {
   final FirebaseAuth _auth = FirebaseAuth.instance;
@@ -12,6 +13,7 @@ class AuthClass {
     ],
   );
 
+  final storage = new FlutterSecureStorage();
   Future<void> googleSignIn(BuildContext context) async {
     try {
       GoogleSignInAccount googleSignInAccount = await _googleSignIn.signIn();
@@ -47,5 +49,12 @@ class AuthClass {
       final snackBar = SnackBar(content: Text(e.toString()));
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
+  }
+
+  void storeTokenAndData(UserCredential userCredential) async {
+    await storage.write(
+        key: "token", value: userCredential.credential.token.toString());
+    await storage.write(
+        key: "usercredential", value: userCredential.toString());
   }
 }
