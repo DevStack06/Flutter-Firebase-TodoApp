@@ -1,10 +1,12 @@
 import 'package:firebase_app_web/Service/Auth_Service.dart';
 import 'package:firebase_app_web/pages/HomePage.dart';
+<<<<<<< HEAD
 import 'package:firebase_app_web/pages/SignInPage.dart';
+=======
+>>>>>>> youtube
 import 'package:firebase_app_web/pages/SignUpPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,6 +22,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+<<<<<<< HEAD
   Widget currentPage = SignUpPage();
   AuthClass authClass = AuthClass();
 
@@ -37,6 +40,25 @@ class _MyAppState extends State<MyApp> {
         currentPage = HomePage();
       });
     }
+=======
+  AuthClass authClass = AuthClass();
+  Widget currentPage = SignUpPage();
+
+  @override
+  void initState() {
+    super.initState();
+    // authClass.signOut();
+    checkLogin();
+  }
+
+  checkLogin() async {
+    String tokne = await authClass.getToken();
+    print("tokne");
+    if (tokne != null)
+      setState(() {
+        currentPage = HomePage();
+      });
+>>>>>>> youtube
   }
 
   @override

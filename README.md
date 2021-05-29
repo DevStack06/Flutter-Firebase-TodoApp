@@ -12,6 +12,12 @@
 
 ### ✨ [Demo](https://www.youtube.com/playlist?list=PLtIU0BH0pkKrQZUFWENF_VXINhfv9WiIA)
 
+## Topic covered
+
+- SignIn/Sign Up with Email and Password
+- SignIn/SignUp with Google
+- SignIn/SignUp using Phone Number
+
 ## Install
 
 ```sh

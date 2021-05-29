@@ -1,6 +1,6 @@
 import 'package:firebase_app_web/Service/Auth_Service.dart';
 import 'package:firebase_app_web/pages/HomePage.dart';
-import 'package:firebase_app_web/pages/PhoneAuthPage.dart';
+import 'package:firebase_app_web/pages/PhoneAuth.dart';
 import 'package:firebase_app_web/pages/SignInPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';

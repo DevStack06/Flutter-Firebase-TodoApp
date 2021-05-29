@@ -1,5 +1,5 @@
 import 'package:firebase_app_web/Service/Auth_Service.dart';
-import 'package:firebase_app_web/pages/SignUpPage.dart';
+import 'package:firebase_app_web/main.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -19,12 +19,12 @@ class _HomePageState extends State<HomePage> {
           IconButton(
               icon: Icon(Icons.logout),
               onPressed: () async {
-                await authClass.logout();
+                await authClass.signOut();
                 Navigator.pushAndRemoveUntil(
                     context,
-                    MaterialPageRoute(builder: (builder) => SignUpPage()),
+                    MaterialPageRoute(builder: (builder) => MyApp()),
                     (route) => false);
-              })
+              }),
         ],
       ),
     );
