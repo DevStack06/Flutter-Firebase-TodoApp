@@ -50,7 +50,7 @@ class AuthClass {
   }
 
   Future<String> veryfyPhoneNuber(
-      String phoneNumber, BuildContext context) async {
+      String phoneNumber, BuildContext context, Function startTimer) async {
     print(phoneNumber);
     String verificationId = "";
     PhoneVerificationCompleted verificationCompleted =
@@ -60,19 +60,18 @@ class AuthClass {
     };
     PhoneVerificationFailed verificationFailed =
         (FirebaseAuthException authException) {
-      verificationId = verificationId;
       showSnackBar(
           context, "Sorry we are not able to verify your phone Number");
     };
     PhoneCodeSent codeSent =
         (String verificationId, [int forceResendingToken]) async {
-      verificationId = verificationId;
       showSnackBar(context, "code have sent to your number");
+      startTimer(verificationId);
     };
     PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
         (String verificationId) {
-      verificationId = verificationId;
       showSnackBar(context, "Timeout");
+      return verificationId;
     };
     try {
       await auth.verifyPhoneNumber(

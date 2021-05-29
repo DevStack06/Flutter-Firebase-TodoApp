@@ -120,7 +120,9 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
     );
   }
 
-  void startTimer() {
+  void startTimer(String verficationId) {
+    print("--------------------->>>>>>>");
+    print(verficationId);
     const onsec = Duration(seconds: 1);
     Timer _timer = Timer.periodic(onsec, (timer) {
       if (start == 0) {
@@ -186,14 +188,13 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
             onTap: wait
                 ? null
                 : () async {
-                    startTimer();
                     setState(() {
                       start = 30;
                       wait = true;
                       buttonName = "Resend";
                     });
                     await authClass.veryfyPhoneNuber(
-                        "+91 ${_phoneController.text}", context);
+                        "+91 ${_phoneController.text}", context, startTimer);
                   },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),
