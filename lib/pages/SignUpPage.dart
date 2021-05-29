@@ -51,7 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ),
               buttonItem("assets/phone.svg", "Continue with Mobile", 30, () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (builder) => PhoneAuth()));
+                    MaterialPageRoute(builder: (builder) => PhoneAuthPage()));
               }),
               SizedBox(
                 height: 18,
