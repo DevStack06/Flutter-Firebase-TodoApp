@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_app_web/Service/Auth_Service.dart';
 import 'package:flutter/material.dart';
 import 'package:otp_text_field/otp_field.dart';
 import 'package:otp_text_field/otp_field_style.dart';
@@ -16,6 +17,9 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
   int start = 30;
   bool wait = false;
   String buttonName = "Send";
+  AuthClass authClass = AuthClass();
+  TextEditingController _phoneController = TextEditingController();
+  String smscode = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -146,6 +150,9 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
       fieldStyle: FieldStyle.underline,
       onCompleted: (pin) {
         print("Completed: " + pin);
+        setState(() {
+          smscode = pin;
+        });
       },
     );
   }
@@ -159,6 +166,9 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
         borderRadius: BorderRadius.circular(15),
       ),
       child: TextFormField(
+        controller: _phoneController,
+        style: TextStyle(color: Colors.white, fontSize: 17),
+        keyboardType: TextInputType.number,
         decoration: InputDecoration(
           border: InputBorder.none,
           hintText: "Enter your phone Number",
@@ -175,13 +185,15 @@ class _PhoneAuthPageState extends State<PhoneAuthPage> {
           suffixIcon: InkWell(
             onTap: wait
                 ? null
-                : () {
+                : () async {
                     startTimer();
                     setState(() {
                       start = 30;
                       wait = true;
                       buttonName = "Resend";
                     });
+                    await authClass.veryfyPhoneNuber(
+                        "+91 ${_phoneController.text}", context);
                   },
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 15),

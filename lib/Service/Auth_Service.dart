@@ -49,6 +49,60 @@ class AuthClass {
     }
   }
 
+  Future<String> veryfyPhoneNuber(
+      String phoneNumber, BuildContext context) async {
+    print(phoneNumber);
+    String verificationId = "";
+    PhoneVerificationCompleted verificationCompleted =
+        (PhoneAuthCredential phoneAuthCredential) async {
+      await auth.signInWithCredential(phoneAuthCredential);
+      showSnackBar(context, "Successfully login");
+    };
+    PhoneVerificationFailed verificationFailed =
+        (FirebaseAuthException authException) {
+      verificationId = verificationId;
+      showSnackBar(
+          context, "Sorry we are not able to verify your phone Number");
+    };
+    PhoneCodeSent codeSent =
+        (String verificationId, [int forceResendingToken]) async {
+      verificationId = verificationId;
+      showSnackBar(context, "code have sent to your number");
+    };
+    PhoneCodeAutoRetrievalTimeout codeAutoRetrievalTimeout =
+        (String verificationId) {
+      verificationId = verificationId;
+      showSnackBar(context, "Timeout");
+    };
+    try {
+      await auth.verifyPhoneNumber(
+          phoneNumber: phoneNumber,
+          timeout: const Duration(seconds: 30),
+          verificationCompleted: verificationCompleted,
+          verificationFailed: verificationFailed,
+          codeSent: codeSent,
+          codeAutoRetrievalTimeout: codeAutoRetrievalTimeout);
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+    return verificationId;
+  }
+
+  Future<void> signInwithPhoneNumber(
+      String verificationId, String smscode, BuildContext context) async {
+    try {
+      final AuthCredential credential = PhoneAuthProvider.credential(
+        verificationId: verificationId,
+        smsCode: smscode,
+      );
+
+      final User user = (await auth.signInWithCredential(credential)).user;
+      showSnackBar(context, "Successfully login");
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
+
   Future<void> storeTokenAndData(UserCredential userCredential) async {
     await storage.write(
         key: "token", value: userCredential.credential.token.toString());
@@ -66,5 +120,10 @@ class AuthClass {
       await auth.signOut();
       await storage.delete(key: "token");
     } catch (e) {}
+  }
+
+  void showSnackBar(BuildContext context, String text) {
+    final snackbar = SnackBar(content: Text(text));
+    ScaffoldMessenger.of(context).showSnackBar(snackbar);
   }
 }
