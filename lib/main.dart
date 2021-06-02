@@ -1,9 +1,5 @@
 import 'package:firebase_app_web/Service/Auth_Service.dart';
 import 'package:firebase_app_web/pages/HomePage.dart';
-<<<<<<< HEAD
-import 'package:firebase_app_web/pages/SignInPage.dart';
-=======
->>>>>>> youtube
 import 'package:firebase_app_web/pages/SignUpPage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -22,25 +18,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-<<<<<<< HEAD
-  Widget currentPage = SignUpPage();
-  AuthClass authClass = AuthClass();
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    checkLogin();
-  }
-
-  void checkLogin() async {
-    String token = await authClass.getToken();
-    if (token != null) {
-      setState(() {
-        currentPage = HomePage();
-      });
-    }
-=======
   AuthClass authClass = AuthClass();
   Widget currentPage = SignUpPage();
 
@@ -58,7 +35,6 @@ class _MyAppState extends State<MyApp> {
       setState(() {
         currentPage = HomePage();
       });
->>>>>>> youtube
   }
 
   @override
