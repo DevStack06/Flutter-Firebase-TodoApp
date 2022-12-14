@@ -6,7 +6,7 @@
   </a>
 </p>
 
-> This project made for those whowanted to learn about the firebase and thier Auth, Cloud Storage and Cloud function modules with Flutter. This repo will help to understand how to use firebase with flutter using a fully functional Todo App
+> This project made for those who wanted to learn about the firebase and thier Auth, Cloud Storage and Cloud function modules with Flutter. This repo will help to understand how to use firebase with flutter using a fully functional Todo App
 
 ### 🏠 [Homepage](https://www.youtube.com/playlist?list=PLtIU0BH0pkKrQZUFWENF_VXINhfv9WiIA)
 
@@ -17,6 +17,54 @@
 - SignIn/Sign Up with Email and Password
 - SignIn/SignUp with Google
 - SignIn/SignUp using Phone Number
+- Create New todo
+- Perform Crud Operation ( Create, Read , Delete and Update todo )
+
+## Screenshots
+
+<h3 align="center" style="color:green" >1. Intro screenshots</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/todo/1.png" width="500"></img>
+</p>
+<br>
+
+<h3 align="center" style="color:green" >2. SignIn/ SIgnUp page</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/todo/2.png" width="500"></img>
+</p>
+<br>
+
+<h3 align="center" style="color:green" >3. Google login</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/todo/3.png" width="500"></img>
+</p>
+<br>
+
+<h3 align="center" style="color:green" >4. SignIn/SignUp via mobile number and otp page</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/todo/4.png" width="500"></img>
+</p>
+<br>
+<h3 align="center" style="color:green" >5. Home Page </h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/todo/7.png" width="500"></img>
+</p>
+<br>
+<h3 align="center" style="color:green" >6. Create new todo page </h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/todo/6.png" width="500"></img>
+</p>
+<br>
+<h3 align="center" style="color:green" >7. View your todo page</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/todo/8.png" width="500"></img>
+</p>
+<br>
+<h3 align="center" style="color:green" >8. Update/Delete todo page</h3>
+ <p align="center">
+<img src="https://github.com/DevStack06/images/blob/master/todo/9.png" width="500"></img>
+</p>
+<br>
 
 ## Install
 
